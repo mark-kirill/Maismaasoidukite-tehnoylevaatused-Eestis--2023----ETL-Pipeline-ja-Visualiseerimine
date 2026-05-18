@@ -1,0 +1,1622 @@
+[
+  {
+    "op": "core/column-addition",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "baseColumnName": "MUDEL",
+    "expression": "grel:cells['MARK'].value + \"|\" + cells['MUDEL'].value",
+    "onError": "set-to-blank",
+    "newColumnName": "mark&model",
+    "columnInsertIndex": 11,
+    "description": "Create column mark&model at index 11 based on column MUDEL using expression grel:cells['MARK'].value + \"|\" + cells['MUDEL'].value"
+  },
+  {
+    "op": "core/mass-edit",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "columnName": "MARK",
+    "expression": "value",
+    "edits": [
+      {
+        "from": [
+          "O&K",
+          "O.K.",
+          "OK"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "O&K"
+      },
+      {
+        "from": [
+          "KRAMER",
+          "KRÄMER"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "KRAMER"
+      },
+      {
+        "from": [
+          "KELBERG",
+          "KEL-BERG"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "KELBERG"
+      },
+      {
+        "from": [
+          "MŽT",
+          "MZT"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "MŽT"
+      },
+      {
+        "from": [
+          "TERASKÄRRY",
+          "TERÄSKÄRRY"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "TERASKÄRRY"
+      },
+      {
+        "from": [
+          "KÄRPPÄ",
+          "KÄRPPA"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "KÄRPPÄ"
+      },
+      {
+        "from": [
+          "IVECO KAPENA",
+          "IVECO / KAPENA"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "IVECO KAPENA"
+      },
+      {
+        "from": [
+          "ALSPAW",
+          "AL-SPAW"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "ALSPAW"
+      },
+      {
+        "from": [
+          "O.M.T.",
+          "OMT"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "O.M.T."
+      }
+    ],
+    "description": "Mass edit cells in column MARK"
+  },
+  {
+    "op": "core/mass-edit",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "columnName": "MARK",
+    "expression": "value",
+    "edits": [
+      {
+        "from": [
+          "EURO TRAILER",
+          "EUROTRAILER"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "EURO TRAILER"
+      },
+      {
+        "from": [
+          "RENAULT/CARPOL",
+          "RENAULT CARPOL"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "RENAULT/CARPOL"
+      },
+      {
+        "from": [
+          "FIAT HITACHI",
+          "FIAT-HITACHI"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "FIAT HITACHI"
+      },
+      {
+        "from": [
+          "DONG FENG",
+          "DONGFENG"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "DONG FENG"
+      },
+      {
+        "from": [
+          "FIAT HYMER",
+          "FIAT-HYMER"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "FIAT HYMER"
+      },
+      {
+        "from": [
+          "SHORE LANDER",
+          "SHORELANDER"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "SHORE LANDER"
+      }
+    ],
+    "description": "Mass edit cells in column MARK"
+  },
+  {
+    "op": "core/column-removal",
+    "columnName": "mark&model",
+    "description": "Remove column mark&model"
+  },
+  {
+    "op": "core/mass-edit",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "columnName": "MUDEL",
+    "expression": "value",
+    "edits": [
+      {
+        "from": [
+          "2.8",
+          "2/8"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "2.8"
+      },
+      {
+        "from": [
+          "4,0",
+          "4.0"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "40"
+      },
+      {
+        "from": [
+          "9-5",
+          "9.5"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "9-5"
+      },
+      {
+        "from": [
+          "300 E",
+          "E 300",
+          "E 300 E"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "300 E"
+      },
+      {
+        "from": [
+          "-",
+          "--"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "-"
+      },
+      {
+        "from": [
+          "CJ-7",
+          "CJ7"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "CJ-7"
+      },
+      {
+        "from": [
+          "OUTLANDER XT 800",
+          "OUTLANDER 800 XT"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "OUTLANDER XT 800"
+      },
+      {
+        "from": [
+          "E18",
+          "E-18"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "E18"
+      },
+      {
+        "from": [
+          "P 270 DB6X2*4HNA",
+          "P 270 DB6X2/4HNA"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "P 270 DB6X2*4HNA"
+      },
+      {
+        "from": [
+          "AT-2000",
+          "AT2000"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "AT-2000"
+      },
+      {
+        "from": [
+          "370/1",
+          "3701"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "370/1"
+      },
+      {
+        "from": [
+          "COOPER D CLUBMAN",
+          "CLUBMAN COOPER D"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "COOPER D CLUBMAN"
+      },
+      {
+        "from": [
+          "COOPER S CLUBMAN",
+          "CLUBMAN COOPER S"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "COOPER S CLUBMAN"
+      },
+      {
+        "from": [
+          "24-10",
+          "2410"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "24-10"
+      },
+      {
+        "from": [
+          "T-400",
+          "T400"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "T-400"
+      },
+      {
+        "from": [
+          "F-85",
+          "F85"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "F-85"
+      },
+      {
+        "from": [
+          "10",
+          "1.0"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "10"
+      },
+      {
+        "from": [
+          "11"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "11"
+      },
+      {
+        "from": [
+          "18"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "18"
+      },
+      {
+        "from": [
+          "C 12",
+          "12 C"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "C 12"
+      },
+      {
+        "from": [
+          "25"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "25"
+      },
+      {
+        "from": [
+          "36"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "36"
+      },
+      {
+        "from": [
+          "52"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "52"
+      },
+      {
+        "from": [
+          "65"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "65"
+      },
+      {
+        "from": [
+          "9-3"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "9-3"
+      },
+      {
+        "from": [
+          "9-7"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "9-7"
+      },
+      {
+        "from": [
+          "SL 350",
+          "350 SL"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "SL 350"
+      },
+      {
+        "from": [
+          "R 100",
+          "R 100 R"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "R 100"
+      },
+      {
+        "from": [
+          "E 220",
+          "220 E"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "E 220"
+      },
+      {
+        "from": [
+          "1500 B",
+          "B 1500"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "1500 B"
+      },
+      {
+        "from": [
+          "RG281",
+          "RG-281"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "RG281"
+      },
+      {
+        "from": [
+          "RG286",
+          "RG-286"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "RG286"
+      },
+      {
+        "from": [
+          "TGX 26.440 6X2/2 BLS",
+          "TGX 26.440 6X2-2 BLS"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "TGX 26.440 6X2/2 BLS"
+      },
+      {
+        "from": [
+          "1300"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "1300"
+      },
+      {
+        "from": [
+          "TGA 26.440 6X2-2 BLS",
+          "TGA 26.440 6X2/2 BLS"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "TGA 26.440 6X2-2 BLS"
+      },
+      {
+        "from": [
+          "C -250 TL",
+          "C 250 TL"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "C 250 TL"
+      },
+      {
+        "from": [
+          "BREN-3015",
+          "BREN3015"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "BREN-3015"
+      },
+      {
+        "from": [
+          "H-1",
+          "H1"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "H-1"
+      },
+      {
+        "from": [
+          "L-3",
+          "L3"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "L3"
+      },
+      {
+        "from": [
+          "T2",
+          "T-2"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "T2"
+      },
+      {
+        "from": [
+          "T3",
+          "T-3"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "T3"
+      },
+      {
+        "from": [
+          "BREN-590B",
+          "BREN590B"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "BREN-590B"
+      },
+      {
+        "from": [
+          "S 63 AMG 4MATIC",
+          "AMG S 63 4MATIC"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "S 63 AMG 4MATIC"
+      },
+      {
+        "from": [
+          "R 620 LB8X4*4HNB",
+          "R 620 LB8X4/4HNB"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "R 620 LB8X4*4HNB"
+      },
+      {
+        "from": [
+          "S 450",
+          "450 S"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "S 450"
+      },
+      {
+        "from": [
+          "HT-1",
+          "HT1"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "HT-1"
+      },
+      {
+        "from": [
+          "K 450",
+          "450 K"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "K 450"
+      },
+      {
+        "from": [
+          "VIANO CDI 2.0",
+          "VIANO 2.0 CDI"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "VIANO CDI 2.0"
+      },
+      {
+        "from": [
+          "ONE D COUNTRYMAN",
+          "COUNTRYMAN ONE D"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "ONE D COUNTRYMAN"
+      },
+      {
+        "from": [
+          "AUTOROLLER 2",
+          "AUTO-ROLLER 2"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "AUTOROLLER 2"
+      },
+      {
+        "from": [
+          "H2-1500",
+          "H21500"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "H2-1500"
+      },
+      {
+        "from": [
+          "200/16.5",
+          "200/16,5"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "200/16.5"
+      },
+      {
+        "from": [
+          "M-63",
+          "M63"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "M-63"
+      },
+      {
+        "from": [
+          "VT 750",
+          "750 VT"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "VT 750"
+      },
+      {
+        "from": [
+          "FLHTP POLICE ELECTRA GLIDE",
+          "FLHTP ELECTRA GLIDE POLICE"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "FLHTP POLICE ELECTRA GLIDE"
+      },
+      {
+        "from": [
+          "E 200",
+          "200 E"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "E 200"
+      },
+      {
+        "from": [
+          "F-350",
+          "F350"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "F-350"
+      },
+      {
+        "from": [
+          "COOPER CLUBMAN",
+          "CLUBMAN COOPER"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "COOPER CLUBMAN"
+      },
+      {
+        "from": [
+          "AMG C 43",
+          "C 43 AMG"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "AMG C 43"
+      },
+      {
+        "from": [
+          "BREN200",
+          "BREN-200"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "BREN200"
+      },
+      {
+        "from": [
+          "BREN-275",
+          "BREN275"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "BREN-275"
+      },
+      {
+        "from": [
+          "BREN-250",
+          "BREN250"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "BREN-250"
+      },
+      {
+        "from": [
+          "VIANO CDI 3.0",
+          "VIANO 3.0 CDI"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "VIANO CDI 3.0"
+      },
+      {
+        "from": [
+          "ZX-10R NINJA",
+          "NINJA ZX-10R"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "ZX-10R NINJA"
+      },
+      {
+        "from": [
+          "COUNTRYMAN COOPER",
+          "COOPER COUNTRYMAN"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "COUNTRYMAN COOPER"
+      },
+      {
+        "from": [
+          "8004",
+          "800-4"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "8004"
+      },
+      {
+        "from": [
+          "E 430",
+          "430 E"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "E 430"
+      },
+      {
+        "from": [
+          "P94 DB6X2*4NB 220",
+          "P94 DB6X2/4NB 220"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "P94 DB6X2*4NB 220"
+      },
+      {
+        "from": [
+          "SL 300",
+          "300 SL"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "SL 300"
+      },
+      {
+        "from": [
+          "300 TE",
+          "TE 300"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "300 TE"
+      },
+      {
+        "from": [
+          "8.100",
+          "8100"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "8.100"
+      },
+      {
+        "from": [
+          "8.103",
+          "8103"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "8.103"
+      },
+      {
+        "from": [
+          "8136",
+          "8.136"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "8136"
+      },
+      {
+        "from": [
+          "8.150",
+          "8150"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "8.150"
+      },
+      {
+        "from": [
+          "S40",
+          "S-40"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "S40"
+      },
+      {
+        "from": [
+          "P94 DB6X2*4NA 260",
+          "P94 DB6X2/4NA 260"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "P94 DB6X2*4NA 260"
+      },
+      {
+        "from": [
+          "R 480 LA6X2/4MNA",
+          "R 480 LA6X2*4MNA"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "R 480 LA6X2/4MNA"
+      },
+      {
+        "from": [
+          "7250 AGROTRON TTV",
+          "AGROTRON TTV 7250"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "7250 AGROTRON TTV"
+      },
+      {
+        "from": [
+          "CHEVY VAN G20 VAN",
+          "CHEVY VAN G20"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "CHEVY VAN G20 VAN"
+      },
+      {
+        "from": [
+          "LIGHTNING CITY X XB9SX",
+          "XB9SX LIGHTNING CITY X"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "LIGHTNING CITY X XB9SX"
+      },
+      {
+        "from": [
+          "OUTLANDER MAX 800",
+          "OUTLANDER 800 MAX"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "OUTLANDER MAX 800"
+      },
+      {
+        "from": [
+          "BREN-300",
+          "BREN300"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "BREN-300"
+      },
+      {
+        "from": [
+          "ONE CLUBMAN",
+          "CLUBMAN ONE"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "ONE CLUBMAN"
+      },
+      {
+        "from": [
+          "9.601",
+          "9601"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "9.601"
+      },
+      {
+        "from": [
+          "BREN-325",
+          "BREN325"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "BREN-325"
+      },
+      {
+        "from": [
+          "BREN-370",
+          "BREN370"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "BREN-370"
+      },
+      {
+        "from": [
+          "JOHN COOPER WORKS CLUBMAN",
+          "CLUBMAN JOHN COOPER WORKS"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "JOHN COOPER WORKS CLUBMAN"
+      },
+      {
+        "from": [
+          "10.8"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "10.8"
+      },
+      {
+        "from": [
+          "109"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "109"
+      },
+      {
+        "from": [
+          "8404"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "8404"
+      },
+      {
+        "from": [
+          "125",
+          "12,5"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "125"
+      },
+      {
+        "from": [
+          "COOPER S COUNTRYMAN ALL4",
+          "COUNTRYMAN COOPER S ALL4"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "COOPER S COUNTRYMAN ALL4"
+      },
+      {
+        "from": [
+          "COOPER D COUNTRYMAN ALL4",
+          "COUNTRYMAN COOPER D ALL4"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "COOPER D COUNTRYMAN ALL4"
+      },
+      {
+        "from": [
+          "165"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "165"
+      },
+      {
+        "from": [
+          "MPS-3",
+          "MPS3"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "MPS-3"
+      },
+      {
+        "from": [
+          "201"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "201"
+      },
+      {
+        "from": [
+          "205"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "205"
+      },
+      {
+        "from": [
+          "210"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "210"
+      },
+      {
+        "from": [
+          "220"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "220"
+      },
+      {
+        "from": [
+          "7-220"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "7-220"
+      },
+      {
+        "from": [
+          "C-200",
+          "C200"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "C-200"
+      },
+      {
+        "from": [
+          "VIANO CDI 2.2",
+          "VIANO 2.2 CDI"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "VIANO CDI 2.2"
+      },
+      {
+        "from": [
+          "SL 500",
+          "500 SL"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "SL 500"
+      },
+      {
+        "from": [
+          "E 300 4MATIC",
+          "300 E 4-MATIC"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "E 300 4MATIC"
+      },
+      {
+        "from": [
+          "30.6"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "306"
+      },
+      {
+        "from": [
+          "30K"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "30K"
+      },
+      {
+        "from": [
+          "MT-09",
+          "MT09"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "MT-09"
+      },
+      {
+        "from": [
+          "MT07",
+          "MT-07"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "MT07"
+      },
+      {
+        "from": [
+          "3-48"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "3-48"
+      },
+      {
+        "from": [
+          "280 S",
+          "S 280"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "280 S"
+      },
+      {
+        "from": [
+          "E 280",
+          "280 E"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "E 280"
+      },
+      {
+        "from": [
+          "DL 1000",
+          "1000 DL"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "DL 1000"
+      },
+      {
+        "from": [
+          "LANDLINER 9.5",
+          "LANDLINER 95"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "LANDLINER 9.5"
+      },
+      {
+        "from": [
+          "CHEVY VAN G30 VAN",
+          "CHEVY VAN G30"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "CHEVY VAN G30 VAN"
+      },
+      {
+        "from": [
+          "MAX-100",
+          "MAX100"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "MAX-100"
+      },
+      {
+        "from": [
+          "FORTERRA 140 HSX",
+          "FORTERRA HSX 140"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "FORTERRA 140 HSX"
+      },
+      {
+        "from": [
+          "S 65 AMG",
+          "AMG S 65"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "S 65 AMG"
+      },
+      {
+        "from": [
+          "745",
+          "7.45"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "745"
+      },
+      {
+        "from": [
+          "8-12",
+          "812"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "8-12"
+      },
+      {
+        "from": [
+          "52-04",
+          "5204"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "52-04"
+      },
+      {
+        "from": [
+          "RG-14",
+          "RG14"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "RG-14"
+      },
+      {
+        "from": [
+          "021.11-254",
+          "021-11-254"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "021.11-254"
+      },
+      {
+        "from": [
+          "750 K",
+          "K 750"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "750 K"
+      },
+      {
+        "from": [
+          "G 440 LB6X2*4MNA",
+          "G 440 LB6X2/4MNA"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "G 440 LB6X2*4MNA"
+      },
+      {
+        "from": [
+          "FB110.2",
+          "FB110/2"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "FB110.2"
+      },
+      {
+        "from": [
+          "K-175",
+          "K175"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "K-175"
+      },
+      {
+        "from": [
+          "TH-2000",
+          "TH2000"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "TH-2000"
+      },
+      {
+        "from": [
+          "VT-750",
+          "VT750"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "VT-750"
+      },
+      {
+        "from": [
+          "E 500",
+          "500 E"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "E 500"
+      },
+      {
+        "from": [
+          "C 250",
+          "250 C"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "C 250"
+      },
+      {
+        "from": [
+          "P 310 DB6X2*4HNB",
+          "P 310 DB6X2/4HNB"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "P 310 DB6X2*4HNB"
+      },
+      {
+        "from": [
+          "I 30",
+          "3.0 I"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "I 30"
+      },
+      {
+        "from": [
+          "580K",
+          "5.80-K"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "580K"
+      },
+      {
+        "from": [
+          "FIREBOLT XB9R",
+          "XB9R FIREBOLT"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "FIREBOLT XB9R"
+      },
+      {
+        "from": [
+          "SL 63 AMG",
+          "AMG SL 63"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "SL 63 AMG"
+      },
+      {
+        "from": [
+          "B-30",
+          "B30"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "B-30"
+      },
+      {
+        "from": [
+          "CABSTAR NT400",
+          "NT400 CABSTAR"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "CABSTAR NT400"
+      },
+      {
+        "from": [
+          "FLHP POLICE ROAD KING",
+          "FLHP ROAD KING POLICE"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "FLHP POLICE ROAD KING"
+      },
+      {
+        "from": [
+          "R 850 R",
+          "850 R"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "R 850 R"
+      },
+      {
+        "from": [
+          "AUTO-ROLLER 41",
+          "AUTOROLLER 41"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "AUTO-ROLLER 41"
+      },
+      {
+        "from": [
+          "BREN-4002",
+          "BREN4002"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "BREN-4002"
+      },
+      {
+        "from": [
+          "C30",
+          "C-30"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "C30"
+      },
+      {
+        "from": [
+          "TGX 26.480 6X2-2 BLS",
+          "TGX 26.480 6X2/2 BLS"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "TGX 26.480 6X2-2 BLS"
+      },
+      {
+        "from": [
+          "R 730 LB8X4/4HNB",
+          "R 730 LB8X4*4HNB"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "R 730 LB8X4/4HNB"
+      },
+      {
+        "from": [
+          "TH3500",
+          "TH-3500"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "TH3500"
+      },
+      {
+        "from": [
+          "C 63 AMG",
+          "AMG C 63"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "C 63 AMG"
+      },
+      {
+        "from": [
+          "AMG G 63",
+          "G 63 AMG"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "AMG G 63"
+      },
+      {
+        "from": [
+          "AMG E 63",
+          "E 63 AMG"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "AMG E 63"
+      },
+      {
+        "from": [
+          "E 350",
+          "E 350 E"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "E 350"
+      },
+      {
+        "from": [
+          "230 E",
+          "E 230"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "230 E"
+      },
+      {
+        "from": [
+          "BREN-325P12",
+          "BREN325P12"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "BREN-325P12"
+      },
+      {
+        "from": [
+          "MT-125",
+          "MT125"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "MT-125"
+      },
+      {
+        "from": [
+          "CLUBMAN ONE D",
+          "ONE D CLUBMAN"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "CLUBMAN ONE D"
+      },
+      {
+        "from": [
+          "1221.3",
+          "122-1-3"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "1221.3"
+      },
+      {
+        "from": [
+          "CLUBMAN COOPER SD",
+          "COOPER SD CLUBMAN"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "CLUBMAN COOPER SD"
+      }
+    ],
+    "description": "Mass edit cells in column MUDEL"
+  },
+  {
+    "op": "core/column-addition",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "baseColumnName": "MUDEL",
+    "expression": "grel:cells['MARK'].value + \"|\" + cells['MUDEL'].value",
+    "onError": "set-to-blank",
+    "newColumnName": "mark&model",
+    "columnInsertIndex": 11,
+    "description": "Create column mark&model at index 11 based on column MUDEL using expression grel:cells['MARK'].value + \"|\" + cells['MUDEL'].value"
+  },
+  {
+    "op": "core/row-removal",
+    "engineConfig": {
+      "facets": [
+        {
+          "type": "list",
+          "name": "MUDEL",
+          "expression": "value",
+          "columnName": "MUDEL",
+          "invert": false,
+          "omitBlank": false,
+          "omitError": false,
+          "selection": [],
+          "selectBlank": true,
+          "selectError": false
+        }
+      ],
+      "mode": "row-based"
+    },
+    "description": "Remove rows"
+  },
+  {
+    "op": "core/row-removal",
+    "engineConfig": {
+      "facets": [
+        {
+          "type": "list",
+          "name": "KERETYYP",
+          "expression": "value",
+          "columnName": "KERETYYP",
+          "invert": false,
+          "omitBlank": false,
+          "omitError": false,
+          "selection": [],
+          "selectBlank": true,
+          "selectError": false
+        }
+      ],
+      "mode": "row-based"
+    },
+    "description": "Remove rows"
+  }
+]

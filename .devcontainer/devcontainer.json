@@ -1,0 +1,10 @@
+{
+  "name": "ETL Pipeline",
+  "build": {
+    "dockerfile": "../Dockerfile"
+  },
+  "workspaceFolder": "/app",
+  "runArgs": [
+    "--init"
+  ]
+}

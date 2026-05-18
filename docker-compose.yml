@@ -1,0 +1,10 @@
+services:
+  csv-pipeline:
+    build: .
+    container_name: csv_pipeline
+
+    volumes:
+      - ./data:/app/data
+      - ./reports/output:/app/reports/output
+
+    restart: "no"

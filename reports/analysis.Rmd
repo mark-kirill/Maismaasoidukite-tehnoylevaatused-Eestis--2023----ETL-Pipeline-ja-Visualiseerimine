@@ -1,0 +1,527 @@
+---
+title: "Projekt"
+output: html_document
+---
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(
+  echo = FALSE,
+  warning = FALSE,
+  message = FALSE
+)
+```
+
+Projekt koosneb kahest osast:
+
+- turu uuring
+- auto TÜ rangesus
+
+```{r load-data, include=FALSE}
+library(readr)
+library(dplyr)
+library(ggplot2)
+library(scales)
+library(ggrepel)
+
+data <- read_tsv("../data/cleaned/cleaned_file.csv")
+```
+
+```{r}
+# посмотреть базу
+glimpse(data)
+head(data)
+names(data)
+summary(data)
+```
+
+
+
+Еsiteks vaatame, kui palju eesti turul firmasid kes teostas TÜ ja kuidas nad jagasid turgu.
+
+```{r}
+library(dplyr)
+
+punkt_stats <- data %>%
+  group_by(PUNKTI_KOOD) %>%
+  summarise(
+    n_reviews = n()
+  ) %>%
+  arrange(desc(n_reviews))
+
+punkt_stats
+```
+Kokku on 132 TÜ punkti. Mõned nendes on sama firma all. Aga selliseid on üksikud.
+
+Edasi vaatame millin autode jaotus kategooriate järgi.
+
+
+```{r}
+library(dplyr)
+library(ggplot2)
+library(scales)
+
+
+
+category_labels <- c(
+  "M1"  = "M1 – sõiduauto",
+  "M1G" = "M1G – maastikuauto",
+  "N1"  = "N1 – kaubik kuni 3.5 t",
+  "N3"  = "N3 – veoauto üle 12 t",
+  "O1"  = "O1 – haagis kuni 0.75 t",
+  "O4"  = "O4 – haagis üle 10 t",
+  "L3e" = "L3e – mootorratas",
+  "Muud" = "Muud – alla 2%"
+)
+
+category_share <- data %>%
+  count(KATEGOORIA) %>%
+  mutate(
+    share = n / sum(n)
+  ) %>%
+  mutate(
+    KATEGOORIA = ifelse(share < 0.02, "Muud", KATEGOORIA)
+  ) %>%
+  group_by(KATEGOORIA) %>%
+  summarise(
+    n = sum(n),
+    .groups = "drop"
+  ) %>%
+  mutate(
+    share = n / sum(n)
+  ) %>%
+  arrange(desc(share)) %>%
+  mutate(
+    KATEGOORIA = factor(KATEGOORIA, levels = KATEGOORIA),
+    label = percent(share, accuracy = 0.1),
+    legend_label = ifelse(
+      KATEGOORIA %in% names(category_labels),
+      category_labels[as.character(KATEGOORIA)],
+      as.character(KATEGOORIA)
+    )
+  )
+
+p_pie <- ggplot(
+  category_share,
+  aes(x = "", y = share, fill = factor(legend_label,
+                                       levels = legend_label))
+) +
+  geom_col(
+    width = 1,
+    color = "white"
+  ) +
+  coord_polar(theta = "y") +
+
+scale_fill_brewer(palette = "Set3") +
+
+
+  # проценты дальше от центра
+geom_text(
+  aes(x = 1.6, label = label),
+  position = position_stack(vjust = 0.5),
+  size = 4
+) +
+
+  labs(
+    title = "Sõidukikategooriate osakaal",
+    subtitle = "Alla 2% kategooriad on ühendatud gruppi 'Muud'",
+    fill = "Kategooria"
+  ) +
+
+  theme_void(base_size = 14) +
+  theme(
+    plot.title = element_text(face = "bold", size = 18),
+    plot.subtitle = element_text(size = 11),
+    legend.position = "right"
+  )
+
+p_pie
+
+ggsave(
+  "../reports/output/category_share_pie.png",
+  plot = p_pie,
+  width = 10,
+  height = 7,
+  dpi = 300
+)
+```
+Näeme, et 80% "tava" autod.
+
+
+Vaatame, kas TÜ äris kehtib reegel 80/20
+
+```{r}
+library(dplyr)
+library(ggplot2)
+library(scales)
+
+punkt_load <- data %>%
+  group_by(PUNKTI_KOOD) %>%
+  summarise(n = n(), .groups = "drop") %>%
+  arrange(desc(n)) %>%
+  mutate(
+    rank = row_number(),
+    share = n / sum(n),
+    cum_share = cumsum(share),
+    point_share = rank / n()
+  )
+
+# значение в точке ~20%
+point_20 <- punkt_load %>%
+  filter(point_share <= 0.20) %>%
+  slice_tail(n = 1)
+
+p_pareto <- ggplot(punkt_load, aes(x = point_share, y = cum_share)) +
+  geom_line(linewidth = 1.2) +
+  geom_point(size = 1.5, alpha = 0.6) +
+
+  # линии 20/80
+  geom_vline(xintercept = 0.20, linetype = "dashed", color = "red") +
+  geom_hline(yintercept = 0.80, linetype = "dashed", color = "red") +
+
+  # 🔥 точка
+  geom_point(
+    data = point_20,
+    aes(x = point_share, y = cum_share),
+    color = "blue",
+    size = 3
+  ) +
+
+  # 🔥 подпись
+  geom_text(
+    data = point_20,
+    aes(
+      x = point_share,
+      y = cum_share,
+      label = paste0(round(cum_share * 100), "%")
+    ),
+    nudge_y = 0.05,
+    size = 5
+  ) +
+
+  scale_x_continuous(labels = percent_format()) +
+  scale_y_continuous(labels = percent_format()) +
+
+  labs(
+    title = "Tehnoülevaatuse turu kontsentratsioon",
+    subtitle = "Kas 20% ülevaatuspunktidest teeb 80% ülevaatustest?",
+    x = "Ülevaatuspunktide kumulatiivne osakaal",
+    y = "Ülevaatuste kumulatiivne osakaal"
+  ) +
+
+  theme_minimal(base_size = 14)
+
+p_pareto
+```
+Turg ei järgi klassikalist 80/20 reeglit – 20% ülevaatuspunktidest teeb vaid umbes 40% ülevaatustest.
+Seega võib arvata, et monopooliat ei ole ja täitsa võib proovida tulla turule. Selleks, et veelgi parem aru saada, kus on nö vabad kohad me edasi vaatame, kus teenindatakse rohkem autosi ja oleks ka hea kanda kõik TÜ punktid kaardi peale. Kuigi selle jaoks oleks vaja saada TÜ asukohad, mida meil ei ole ja tuleb lisa tööd teha. Jättame seda suve tööks.
+
+Edasi vaatame kuhu TÜ rangesus ja kuhu parem mitte käia.
+
+```{r}
+library(ineq)
+
+gini_value <- ineq(punkt_load$n, type = "Gini")
+
+gini_value
+```
+
+
+```{r}
+library(dplyr)
+library(ggplot2)
+library(scales)
+
+# Fail rate by inspection station
+fail_rate <- data %>%
+  mutate(
+    fail = YLEVAATUSOTSUS != "KORRAS"
+  ) %>%
+  group_by(PUNKTI_KOOD) %>%
+  summarise(
+    fail_rate = mean(fail, na.rm = TRUE),
+    n_reviews = n(),
+    .groups = "drop"
+  )
+
+# Remove very small stations to avoid noise
+fail_rate_filtered <- fail_rate %>%
+  filter(n_reviews > 1000)
+
+# Mean and median
+mean_fail <- mean(fail_rate_filtered$fail_rate, na.rm = TRUE)
+median_fail <- median(fail_rate_filtered$fail_rate, na.rm = TRUE)
+
+# Plot
+p_fail <- ggplot(fail_rate_filtered, aes(x = fail_rate)) +
+  geom_histogram(
+    bins = 30,
+    fill = "tomato",
+    alpha = 0.8,
+    color = "white"
+  ) +
+  geom_vline(
+    xintercept = mean_fail,
+    color = "red",
+    linewidth = 1
+  ) +
+  geom_vline(
+    xintercept = median_fail,
+    color = "blue",
+    linewidth = 1
+  ) +
+  annotate(
+    "text",
+    x = mean_fail,
+    y = Inf,
+    label = paste0("Keskmine: ", percent(mean_fail, accuracy = 0.1)),
+    color = "red",
+    vjust = 1.5,
+    hjust = -0.1,
+    size = 4
+  ) +
+  annotate(
+    "text",
+    x = median_fail,
+    y = Inf,
+    label = paste0("Mediaan: ", percent(median_fail, accuracy = 0.1)),
+    color = "blue",
+    vjust = 3,
+    hjust = 1.1,
+    size = 4
+  ) +
+  scale_x_continuous(
+    labels = percent_format(accuracy = 1)
+  ) +
+  scale_y_continuous(
+    breaks = function(x) seq(0, ceiling(max(x)), by = 2)
+  ) +
+  labs(
+    title = "Ülevaatuspunktide rangeuse jaotus",
+    subtitle = "Kui suur osa sõidukitest ei läbi ülevaatust",
+    x = "Mitte läbinud osakaal",
+    y = "Punktide arv"
+  ) +
+  theme_minimal(base_size = 14) +
+  theme(
+    plot.title = element_text(face = "bold", size = 18),
+    plot.subtitle = element_text(size = 12),
+    panel.grid.minor = element_blank()
+  )
+
+p_fail
+
+ggsave(
+  "../reports/output/fail_rate_distribution.png",
+  plot = p_fail,
+  width = 10,
+  height = 6,
+  dpi = 300
+)
+```
+
+
+
+```{r}
+
+library(dplyr)
+library(ggplot2)
+library(ggrepel)
+library(scales)
+
+
+
+# Main category for each inspection point
+main_category <- data %>%
+  count(PUNKTI_KOOD, KATEGOORIA) %>%
+  group_by(PUNKTI_KOOD) %>%
+  slice_max(n, n = 1, with_ties = FALSE) %>%
+  ungroup() %>%
+  select(PUNKTI_KOOD, KATEGOORIA)
+
+# Add main category to fail_rate data
+fail_rate_filtered <- fail_rate_filtered %>%
+  left_join(main_category, by = "PUNKTI_KOOD")
+
+# Top 5 strictest and top 5 softest stations
+top_outliers <- fail_rate_filtered %>%
+  arrange(desc(fail_rate)) %>%
+  slice_head(n = 5) %>%
+  mutate(id = row_number())
+
+bottom_outliers <- fail_rate_filtered %>%
+  arrange(fail_rate) %>%
+  slice_head(n = 5) %>%
+  mutate(id = row_number())
+
+# Mean fail rate
+mean_fail <- mean(fail_rate_filtered$fail_rate, na.rm = TRUE)
+
+# Plot
+p_extreme <- ggplot(fail_rate_filtered,
+                    aes(x = n_reviews, y = fail_rate)) +
+  geom_point(
+    aes(size = n_reviews, color = KATEGOORIA),
+    alpha = 0.7
+  ) +
+  geom_point(
+    data = top_outliers,
+    aes(size = n_reviews),
+    shape = 21,
+    stroke = 1.5,
+    color = "black",
+    fill = NA
+  ) +
+  geom_point(
+    data = bottom_outliers,
+    aes(size = n_reviews),
+    shape = 21,
+    stroke = 1.5,
+    color = "black",
+    fill = NA
+  ) +
+  geom_text_repel(
+    data = top_outliers,
+    aes(label = paste0("T", id)),
+    size = 4
+  ) +
+  geom_text_repel(
+    data = bottom_outliers,
+    aes(label = paste0("B", id)),
+    size = 4
+  ) +
+  geom_hline(
+    yintercept = mean_fail,
+    linetype = "dashed",
+    color = "blue"
+  ) +
+  scale_size_continuous(
+    range = c(2, 10),
+    name = "Ülevaatuste arv"
+  ) +
+  scale_y_continuous(
+    labels = percent_format(accuracy = 1)
+  ) +
+  labs(
+    title = "Ülevaatuspunktide rangeus vs koormus",
+    subtitle = "Värv = peamine sõidukikategooria; must ring = 5 rangeimat / 5 leebeimat",
+    x = "Ülevaatuste arv",
+    y = "Mitte läbinud osakaal",
+    color = "Kategooria"
+  ) +
+  theme_minimal(base_size = 14) +
+  theme(
+    plot.title = element_text(face = "bold", size = 18),
+    plot.subtitle = element_text(size = 12),
+    panel.grid.minor = element_blank()
+  )
+
+p_extreme
+
+ggsave(
+  "../reports/output/fail_rate_by_category.png",
+  plot = p_extreme,
+  width = 10,
+  height = 6,
+  dpi = 300
+)
+
+# Tables for marked points
+top_table <- top_outliers %>%
+  left_join(
+    data %>%
+      select(PUNKTI_KOOD, TEHNOYLEVAATUSPUNKT) %>%
+      distinct(),
+    by = "PUNKTI_KOOD"
+  ) %>%
+  select(id, PUNKTI_KOOD, TEHNOYLEVAATUSPUNKT, KATEGOORIA, fail_rate, n_reviews)
+
+bottom_table <- bottom_outliers %>%
+  left_join(
+    data %>%
+      select(PUNKTI_KOOD, TEHNOYLEVAATUSPUNKT) %>%
+      distinct(),
+    by = "PUNKTI_KOOD"
+  ) %>%
+  select(id, PUNKTI_KOOD, TEHNOYLEVAATUSPUNKT, KATEGOORIA, fail_rate, n_reviews)
+
+top_table
+bottom_table
+```
+Näeme, et A-Ülevaatusel on üsna palju kliente. Osaliselt see seotud ka sellega, et nende on allahindlus, kui teed broneeringu ja makse läbi webi.
+Aga nad on kõige rangemad. (Olin ka seda proovinud oma nahal.) 
+
+Graafiku järgi näeme, et TÜ rangesus ei ole kuidagi seotud koormusega.
+
+
+```{r}
+category_fail <- data %>%
+  mutate(
+    fail = YLEVAATUSOTSUS != "KORRAS"
+  ) %>%
+  group_by(KATEGOORIA) %>%
+  summarise(
+    fail_rate = mean(fail, na.rm = TRUE),
+    n_reviews = n(),
+    .groups = "drop"
+  ) %>%
+  filter(n_reviews > 1000) %>%
+  arrange(desc(fail_rate))
+
+category_fail
+```
+
+
+```{r}
+
+
+
+p_cat <- ggplot(category_fail,
+                aes(x = reorder(KATEGOORIA, fail_rate),
+                    y = fail_rate,
+                    fill = fail_rate)) +
+
+  geom_col() +
+
+  geom_text(
+    aes(label = percent(fail_rate, accuracy = 0.1)),
+    hjust = -0.1,
+    size = 4
+  ) +
+
+  coord_flip() +
+
+  scale_y_continuous(
+    labels = percent_format(),
+    expand = expansion(mult = c(0, 0.1))
+  ) +
+
+  scale_fill_gradient(
+    low = "#A5D6A7",
+    high = "#C62828"
+  ) +
+
+  labs(
+    title = "Mitte-läbimise määr sõidukikategooriate lõikes",
+    subtitle = "Millised sõidukid ei läbi tehnoülevaatust kõige sagedamini",
+    x = "Sõidukikategooria",
+    y = "Mitte läbinud osakaal"
+  ) +
+
+  theme_minimal(base_size = 14) +
+
+  theme(
+    legend.position = "none",
+    plot.title = element_text(face = "bold", size = 18)
+  )
+
+p_cat
+
+ggsave(
+  "../reports/output/category_fail_rate.png",
+  plot = p_cat,
+  width = 10,
+  height = 6,
+  dpi = 300
+)
+```
+
+
