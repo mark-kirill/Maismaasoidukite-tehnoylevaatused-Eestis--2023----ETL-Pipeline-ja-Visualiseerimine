@@ -1,4 +1,9 @@
 # Maismaasõidukite tehnoülevaatused Eestis (2023) - ETL Pipeline ja Visualiseerimine
+**Autorid**: Mark-Kirill Gubal,
+Aleksandr Markov,
+Jaroslav Polovnikov,
+Sergei Sizov
+
 Projekt on **ETL-pipeline**, mis ekstraktib, puhastab ja laadib andmed SQLite andmebaasi ning genereerib visualiseerimise RMarkdowni abil. Selleks kasutab projekt Andmete teabevärava andmestiku ["Maismaasõidukite tehnoülevaatused Eestis"](https://andmed.eesti.ee/datasets/maismaasoidukite-tehnoulevaatused-eestis) andmed aastast **2023**.
 
 Andmestiku API: https://andmed.eesti.ee/api/datasets/ae47fec7-63d0-4b7a-969b-fbdfed21d52a/files/1943aed4-8e53-4e70-9946-7fc8ad1f7dfe/download-s3
